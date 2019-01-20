@@ -1,4 +1,0 @@
-
-_squid:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÿ¨ Á
-Zsquid:UselessImportCheck"3Remove this unused import 'javax.validation.Valid'.(æ¤ñ÷úÿÿÿÿ
-vsquid:UselessImportCheck"ORemove this unused import 'org.springframework.http.server.ServerHttpResponse'.(Íýˆ„øÿÿÿÿ
