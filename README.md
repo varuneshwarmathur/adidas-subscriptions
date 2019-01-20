@@ -15,7 +15,7 @@ The service will behave in a **consumer-producer model**, the consumer interface
 This will ensure a resilient approach to async calls from up-stream api with 99.9% chance of message prevention.
 
 ### Design Flow
-![alt text](https://raw.githubusercontent.com/varuneshwarmathur/credit-card-processor/master/swagger.png)
+![alt text](https://github.com/varuneshwarmathur/adidas-subscriptions/blob/master/Subscription-Service.png)
 
 **Tech Stack**
   - Spring Boot 2.0.3.Release
