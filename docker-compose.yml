@@ -1,0 +1,97 @@
+version: '3'
+services:
+  eureka-server:
+        container_name: eureka-server
+        build:
+            context: eurekaserver/.
+        image: eureka-server:latest
+        networks:
+            - spring-cloud-network
+  subscription-service:
+        container_name: subscription-service
+        build:
+            context: subscriptionservice/.
+        image: varuneshwarmathu/subscription-service:latest
+        environment:
+            - EUREKA_HOST=eureka-server
+        networks:
+            - spring-cloud-network
+        links:
+            - eureka-server
+        depends_on:
+            - eureka-server
+  email-service:
+        container_name: email-service
+        build:
+            context: emailservice/.
+        image: varuneshwarmathur/email-service:latest
+        environment:
+            - EUREKA_HOST=eureka-server
+        networks:
+            - spring-cloud-network
+        links:
+            - eureka-server
+        depends_on:
+            - eureka-server
+  event-service:
+        container_name: event-service
+        build:
+            context: eventservice/.
+        image: varuneshwarmathur/event-service:latest
+        environment:
+            - EUREKA_HOST=eureka-server
+        networks:
+            - spring-cloud-network
+        links:
+            - eureka-server
+        depends_on:
+            - eureka-server
+  mongodb:
+    container_name: subscription-mongo
+    image: mongo:3.6
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+    ports:
+        - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+  subscriptionservice:
+    restart: always
+    build: ./subscriptionservice
+    working_dir: /subscriptionservice
+    volumes:
+      - ./subscriptionservice:/subscriptionservice
+      - ~/.m2:/root/.m2
+    expose:
+      - "8080"
+    command: mvn clean spring-boot:run
+    depends_on:
+      - mongodb
+
+  emailservice:
+    restart: always
+    build: ./emailservice
+    working_dir: /emailservice
+    volumes:
+      - ./emailservice:/emailservice
+      - ~/.m2:/root/.m2
+    expose:
+      - "9091"
+    command: mvn clean spring-boot:run
+
+  eventservice:
+    restart: always
+    build: ./eventservice
+    working_dir: /eventservice
+    volumes:
+      - ./eventservice:/eventservice
+      - ~/.m2:/root/.m2
+    expose:
+      - "9090"
+    command: mvn clean spring-boot:run
+networks:
+    spring-cloud-network:
+        driver: bridge
