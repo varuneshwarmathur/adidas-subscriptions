@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class EventServiceController {
 
-
+@ResponseBody
     @RequestMapping(path = "/event", method = RequestMethod.POST , produces = "application/json")
 
     /** Invokes the Service Implementation which then publishes
