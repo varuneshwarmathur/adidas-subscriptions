@@ -142,10 +142,10 @@ http://localhost:8080/adidas/v1/actuator/health
 docker-compose up --build
 ```
 ### RestAPI Details
-![alt text](https://raw.githubusercontent.com/varuneshwarmathur/credit-card-processor/master/swagger.png)
+![alt text](https://github.com/varuneshwarmathur/adidas-subscriptions/blob/master/swagger_ui.png)
 
 ### Eureka Service Registration
-![alt text](https://raw.githubusercontent.com/varuneshwarmathur/credit-card-processor/master/swagger.png)
+![alt text](https://github.com/varuneshwarmathur/adidas-subscriptions/blob/master/eureka_server.png)
 
 
 ### CI / CD Approach
