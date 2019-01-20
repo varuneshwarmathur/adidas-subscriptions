@@ -1,0 +1,69 @@
+swagger: '2.0'
+info:
+  description: This api features a generic subscription service
+  version: 1.0.0
+  title: Adidas Subscription Service
+  contact:
+    name: Varuneshwar
+    email: mathur_varunesh@yahoo.com
+host: 'localhost:8080'
+basePath: /adidas/v1
+tags:
+  - name: subscription-service-controller
+    description: Subscription Service Controller
+paths:
+  /newsletter-subscription:
+    post:
+      tags:
+        - subscription-service-controller
+      summary: Log A New Subscription Event
+      operationId: newsletterSubscriptionPost
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/SubscriptionRequestModel'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SubscriptionServiceResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  SubscriptionRequestModel:
+    type: object
+    properties:
+      firstName:
+        type: string
+      gender:
+        type: string
+      emailId:
+        type: string
+      dateOfBirth:
+        type: string
+      consentGranted:
+        type: boolean
+    required:
+    - emailId
+    - dateOfBirth
+    - consentGranted
+  SubscriptionServiceResponse:
+    type: object
+    properties:
+      subscriptionId:
+        type: string
+      eventServiceResponse:
+        type: object
+      emailServiceResponse:
+        type: object
